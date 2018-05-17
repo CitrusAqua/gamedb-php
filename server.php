@@ -5,15 +5,34 @@
  * Date: 2018/5/17
  * Time: 16:13
  */
-    $id = $_GET['id'];
+$id = $_GET['id'];
+$create_player_success = isset($_GET['create_player']) ? $_GET['create_player'] : null;
 
-    $host        = "host=127.0.0.1";
-    $port        = "port=5432";
-    $dbname      = "dbname=gamedb";
-    $credentials = "user=gamedbuser password=gPassword";
+$host        = "host=127.0.0.1";
+$port        = "port=5432";
+$dbname      = "dbname=gamedb";
+$credentials = "user=gamedbuser password=gPassword";
 
-    $db = pg_connect( "$host $port $dbname $credentials"  );
+$db = pg_connect( "$host $port $dbname $credentials"  );
 
+?>
+
+<?php
+if(isset($_POST['submit'])) {
+    $new_name = $_POST['new_name'];
+    $new_level = $_POST['new_level'];
+    $new_health = $_POST['new_health'];
+    $new_career = $_POST['new_career'];
+    $query = pg_query($db, "INSERT INTO players(server_id, name, level, health, career) VALUES($id, '$new_name', $new_level, $new_health, '$new_career');");
+    //Header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . 'id=' . $id . '&create_player=true');
+    if ($query) {
+        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . 'id=' . $id . '&create_player=true');
+        exit;
+    } else {
+        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . 'id=' . $id . '&create_player=false');
+        exit;
+    }
+}
 ?>
 
 
@@ -41,7 +60,7 @@
         </ol>
     </nav>
 
-    <div class="row">
+    <div class="row" style="margin-bottom: 20px;">
         <div class="col">
             <div class="page-header">
                 <h1>
@@ -64,26 +83,62 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                        <div class="modal-body">
-                            <%= f.label :name, class: "col-form-label" %><br>
-                            <%= f.text_field :name, class: "form-control" %>
-                            <%= f.label :career, class: "col-form-label" %><br>
-                            <%= f.text_field :career, class: "form-control" %>
-                            <%= f.label :level, class: "col-form-label" %><br>
-                            <%= f.text_field :level, class: "form-control" %>
-                            <%= f.label :health, class: "col-form-label" %><br>
-                            <%= f.text_field :health, class: "form-control" %>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <!-- <button type="button" class="btn btn-primary">Create player</button> -->
-                            <%= f.submit "Create player", class: 'btn btn-primary' -%>
-                        </div>
+                        <form method="post">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="nameInput">Name</label>
+                                    <input type="text" class="form-control" id="nameInput" placeholder="Max 11 chars" name="new_name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="levelInput">Level</label>
+                                    <input type="number" class="form-control" id="levelInput" name="new_level">
+                                </div>
+                                <div class="form-group">
+                                    <label for="healthInput">Health</label>
+                                    <input type="number" class="form-control" id="healthInput" name="new_health">
+                                </div>
+                                <div class="form-group">
+                                    <label for="careerSelect">Example select</label>
+                                    <select class="form-control" id="careerSelect" name="new_career">
+                                        <option value="Knight">Knight</option>
+                                        <option value="Mage">Mage</option>
+                                        <option value="Priest">Priest</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary" name="submit" value=true >Create Player</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <?php
+    if (!isset($create_player_success)) {}
+    elseif ($create_player_success == 'true') {
+        echo <<<EOF
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Successfully created player.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+EOF;
+    } else {
+        echo <<<EOF
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Failed to create player. Something went wrong.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+EOF;
+    }
+    ?>
 
     <div class="list-group">
 
@@ -93,7 +148,7 @@
 
         while ($row = pg_fetch_row($player_list)) {
             echo <<<EOF
-                <div class="card" style="max-width:760px; margin-top: 40px">
+                <div class="card" style="max-width:760px; margin-top: 20px; margin-bottom: 20px;">
                     <div class="card-body">
                 
                         <div class="container">

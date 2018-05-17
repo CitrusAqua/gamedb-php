@@ -6,12 +6,12 @@
  * Time: 10:42
  */
 
-    $host        = "host=127.0.0.1";
-    $port        = "port=5432";
-    $dbname      = "dbname=gamedb";
-    $credentials = "user=gamedbuser password=gPassword";
+$host        = "host=127.0.0.1";
+$port        = "port=5432";
+$dbname      = "dbname=gamedb";
+$credentials = "user=gamedbuser password=gPassword";
 
-    $db = pg_connect( "$host $port $dbname $credentials"  );
+$db = pg_connect( "$host $port $dbname $credentials"  );
 
 ?>
 

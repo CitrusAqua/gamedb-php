@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1792ebdc-a824-48c0-91ac-a96964d4cbfc" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/createTables.sql" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/info.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/player.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server-list.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/createTables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/createTables.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/info.php" beforeDir="false" afterPath="$PROJECT_DIR$/info.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player.php" beforeDir="false" afterPath="$PROJECT_DIR$/player.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servers-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/servers-list.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -37,8 +34,8 @@
       <file leaf-file-name="info.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/info.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
+            <state relative-caret-position="176">
+              <caret line="8" column="2" lean-forward="true" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -46,8 +43,8 @@
       <file leaf-file-name="servers-list.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/servers-list.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="42" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="94">
+              <caret line="74" column="57" lean-forward="true" selection-start-line="74" selection-start-column="57" selection-end-line="74" selection-end-column="57" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
@@ -62,8 +59,8 @@
       <file leaf-file-name="player.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/player.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8">
-              <caret line="68" column="63" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
+            <state relative-caret-position="374">
+              <caret line="17" column="102" lean-forward="true" selection-start-line="17" selection-end-line="17" selection-end-column="102" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -80,11 +77,17 @@
       <file leaf-file-name="server.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="296">
-              <caret line="118" column="35" selection-start-line="118" selection-start-column="35" selection-end-line="118" selection-end-column="35" />
+            <state relative-caret-position="171">
+              <caret line="62" column="48" selection-start-line="62" selection-start-column="48" selection-end-line="62" selection-end-column="48" />
               <folding>
                 <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-                <element signature="e#2398#2405#1#HTML" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="e#1079#1086#1" expanded="true" />
+                <element signature="e#270#277#1" expanded="true" />
+                <element signature="e#288#295#1" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -93,8 +96,8 @@
       <file leaf-file-name="createTables.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/createTables.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+            <state relative-caret-position="782">
+              <caret line="58" column="69" lean-forward="true" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
             </state>
           </provider>
         </entry>
@@ -112,13 +115,13 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/info.php" />
         <option value="N:/php-7.2.5/php.ini" />
         <option value="$PROJECT_DIR$/server-list.php" />
-        <option value="$PROJECT_DIR$/server.php" />
-        <option value="$PROJECT_DIR$/servers-list.php" />
         <option value="$PROJECT_DIR$/player.php" />
+        <option value="$PROJECT_DIR$/servers-list.php" />
+        <option value="$PROJECT_DIR$/info.php" />
         <option value="$PROJECT_DIR$/createTables.sql" />
+        <option value="$PROJECT_DIR$/server.php" />
       </list>
     </option>
   </component>
@@ -213,12 +216,12 @@
       <workItem from="1526538203514" duration="322000" />
       <workItem from="1526538539581" duration="101000" />
       <workItem from="1526538654663" duration="1091000" />
-      <workItem from="1526539762875" duration="22293000" />
+      <workItem from="1526539762875" duration="27915000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="30249000" />
+    <option name="totallyTimeSpent" value="35871000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -381,29 +384,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/info.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="8" column="2" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/servers-list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
-          <folding>
-            <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="e#1091#1098#1" expanded="true" />
-            <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="176">
+          <caret line="8" column="2" lean-forward="true" selection-start-line="8" selection-start-column="2" selection-end-line="8" selection-end-column="2" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/player.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8">
-          <caret line="68" column="63" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
+        <state relative-caret-position="374">
+          <caret line="17" column="102" lean-forward="true" selection-start-line="17" selection-end-line="17" selection-end-column="102" />
           <folding>
             <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
@@ -418,18 +407,38 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/createTables.sql">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="51" column="30" selection-start-line="51" selection-start-column="30" selection-end-line="51" selection-end-column="30" />
+        <state relative-caret-position="782">
+          <caret line="58" column="69" lean-forward="true" selection-start-line="58" selection-start-column="69" selection-end-line="58" selection-end-column="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/servers-list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="94">
+          <caret line="74" column="57" lean-forward="true" selection-start-line="74" selection-start-column="57" selection-end-line="74" selection-end-column="57" />
+          <folding>
+            <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#1091#1098#1" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="296">
-          <caret line="118" column="35" selection-start-line="118" selection-start-column="35" selection-end-line="118" selection-end-column="35" />
+        <state relative-caret-position="171">
+          <caret line="62" column="48" selection-start-line="62" selection-start-column="48" selection-end-line="62" selection-end-column="48" />
           <folding>
             <element signature="n#style#0;n#nav#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#2398#2405#1#HTML" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="e#1079#1086#1" expanded="true" />
+            <element signature="e#270#277#1" expanded="true" />
+            <element signature="e#288#295#1" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
