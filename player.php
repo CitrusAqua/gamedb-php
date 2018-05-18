@@ -35,7 +35,7 @@ $holds = pg_query($db, "SELECT * FROM holds WHERE server_id = $server_id AND pla
 <body>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">The Game Database</a>
+    <a class="navbar-brand" href="/gamedb-php/servers-list.php">The Game Database</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -71,7 +71,7 @@ $holds = pg_query($db, "SELECT * FROM holds WHERE server_id = $server_id AND pla
             $player_health = pg_fetch_result($player, 4);
             $player_career = pg_fetch_result($player, 5);
             echo <<<EOF
-                <h1 style="margin-bottom: 40px">$player_name</h1>
+                <h1 style="margin-bottom: 36px">$player_name</h1>
                 <h5>level: $player_level</h5>
                 <h5>health: $player_health</h5>
                 <h5>career: $player_career</h5>
@@ -89,7 +89,7 @@ EOF;
                     $item_name = pg_fetch_result($item,1);
                     $item_value = pg_fetch_result($item,2);
                     echo <<<EOF
-                        <div class="card mw-100" style="min-width: 220px; margin: 10px;">
+                        <div class="card" style="min-width: 220px; margin: 12px;">
                             <div class="card-body" style="padding-bottom: 10px">
                                 <h4 class="card-title" style="margin-right: 20px;">$item_name</h4>
                                 <h6>value: $item_value</h6>

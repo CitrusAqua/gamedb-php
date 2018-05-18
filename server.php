@@ -7,6 +7,7 @@
  */
 $id = $_GET['id'];
 $create_player_success = isset($_GET['create_player']) ? $_GET['create_player'] : null;
+$delete_player_success = isset($_GET['delete_player']) ? $_GET['delete_player'] : null;
 
 $host        = "host=127.0.0.1";
 $port        = "port=5432";
@@ -18,7 +19,7 @@ $db = pg_connect( "$host $port $dbname $credentials"  );
 ?>
 
 <?php
-if(isset($_POST['submit'])) {
+if(isset($_POST['new_player'])) {
     $new_name = $_POST['new_name'];
     $new_level = $_POST['new_level'];
     $new_health = $_POST['new_health'];
@@ -33,6 +34,22 @@ if(isset($_POST['submit'])) {
         exit;
     }
 }
+if(isset($_POST['destroy'])) {
+    $player_id = $_POST['destroy'];
+    pg_query($db, "BEGIN TRANSACTION;");
+    $query1 = pg_query($db, "DELETE FROM holds WHERE server_id = $id AND player_id = '$player_id' ;");
+    $query2 = pg_query($db, "DELETE FROM players WHERE server_id = $id AND id = '$player_id' ;");
+    if ($query1 and $query2) {
+        pg_query($db, "COMMIT;");
+        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . 'id=' . $id . '&delete_player=true');
+        exit;
+    } else {
+        pg_query($db, "ROLLBACK;");
+        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . 'id=' . $id . '&delete_player=false');
+        exit;
+    }
+}
+
 ?>
 
 
@@ -47,12 +64,18 @@ if(isset($_POST['submit'])) {
     <script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js" integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U" crossorigin="anonymous"></script>
     <script src="bootstrap-material-design-dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
     <script>$(document).ready(function() { $('body').bootstrapMaterialDesign(); });</script>
+    <!-- SnackbarJS plugin -->
+    <script src="https://cdn.rawgit.com/FezVrasta/snackbarjs/1.1.0/dist/snackbar.min.js"></script>
+
+    <script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js" integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9" crossorigin="anonymous"></script>
+    <script>
+        $('body').bootstrapMaterialDesign();
+    </script>
 </head>
 
-<body>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">The Game Database</a>
+    <a class="navbar-brand" href="/gamedb-php/servers-list.php">The Game Database</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -129,7 +152,7 @@ if(isset($_POST['submit'])) {
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <button type="submit" class="btn btn-primary" name="submit" value=true >Create Player</button>
+                                <button type="submit" class="btn btn-primary" name="new_player" value=true >Create Player</button>
                             </div>
                         </form>
                     </div>
@@ -137,6 +160,14 @@ if(isset($_POST['submit'])) {
             </div>
         </div>
     </div>
+
+<!-- </div> -->
+
+
+
+
+
+<!-- <div class="container"> -->
 
     <?php
     if (!isset($create_player_success)) {}
@@ -159,9 +190,30 @@ EOF;
             </div>
 EOF;
     }
+    if (!isset($delete_player_success)) {}
+    elseif ($delete_player_success == 'true') {
+        echo <<<EOF
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                Successfully deleted player.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+EOF;
+    } else {
+        echo <<<EOF
+            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Failed to delete player. Something went wrong.
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+EOF;
+    }
     ?>
 
-    <div class="list-group">
+    <!-- <div class="list-group"> -->
+    <div class="d-flex flex-wrap">
 
         <?php
 
@@ -169,62 +221,57 @@ EOF;
 
         while ($row = pg_fetch_row($player_list)) {
             echo <<<EOF
-                <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="card" style="margin: 12px; width: 531px">
                     <div class="card-body">
-                
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-sm">
-                                    <h3 class="card-title">$row[2]</h3>
-                                    <h6>level: $row[3]</h6>
-                                    <h6>health: $row[4]</h6>
-                                    <h6>career: $row[5]</h6>
+                        <div class="row">
+                            <div class="col">
+                                <h5 class="card-title">$row[2]</h5>
+                                <h6>level: $row[3]</h6>
+                                <h6>health: $row[4]</h6>
+                                <h6>career: $row[5]</h6>
+                            </div>
+                            <!--<div class="col">
+                                <img src="nepgear.png" class="img-fluid" alt="Responsive image">
+                            </div>-->
+                        </div>
+                    </div>
+                    
+                    <div class="card-footer" style="padding-right: 14px; padding-bottom: 0px; padding-top: 0px">
+                        <div class="btn-group float-right" role="group" aria-label="Basic example">
+                            <a href="/gamedb-php/player.php?server_id=$row[1]&player_id=$row[0]" class="btn btn-primary">Show</a>
+                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal$row[0]">Delete</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal$row[0]" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmation" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLongTitle">Delete player</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
                                 </div>
-                
-                                <div class="col-sm">
-                                    <div class="btn-group float-right" role="group" aria-label="Basic example">
-                                        <a href="/gamedb-php/player.php?server_id=$row[1]&player_id=$row[0]" class="btn btn-primary">Show</a>
-                                        <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal$row[0]">Delete</button>
+                                <div class="modal-body">
+                                    You will delete this player. Are you sure?
+                                </div>
+                                <form action="" method="post" style="margin:0px">
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                        <button name="destroy" value=$row[0] type="submit" class="btn btn-danger">Delete</button>
                                     </div>
-                                </div>
-                
-                                <!-- Modal -->
-                                <div class="modal fade" id="deleteModal$row[0]" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmation" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLongTitle">Delete player</h5>
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <div class="modal-body">
-                                                You will delete this player. Are you sure?
-                                            </div>
-                                            <form action="" method="post" style="margin:0px">
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                                    <button name="destroy" value=$row[0] type="submit" class="btn btn-danger">Delete</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                
+                                </form>
                             </div>
                         </div>
-                
                     </div>
+                    
                 </div>
 EOF;
 
         }
 
-        if(isset($_POST['destroy'])) {
-            $player_id = $_POST['destroy'];
-            $query = pg_query($db, "DELETE FROM players WHERE server_id = $id AND id = '$player_id' ;");
-            echo "<meta http-equiv='refresh' content='0'>";
-        }
+
 
 
         ?>

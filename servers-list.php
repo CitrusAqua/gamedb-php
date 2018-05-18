@@ -31,7 +31,7 @@ $db = pg_connect( "$host $port $dbname $credentials"  );
 <body>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">The Game Database</a>
+    <a class="navbar-brand" href="/gamedb-php/servers-list.php">The Game Database</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
@@ -64,7 +64,7 @@ $db = pg_connect( "$host $port $dbname $credentials"  );
 
         while ($row = pg_fetch_row($server_list)) {
             echo <<<EOF
-                <div class="card" style="margin-top: 20px; margin-bottom: 20px">
+                <div class="card" style="margin: 12px">
                     <div class="card-body">
                 
                         <div class="container">

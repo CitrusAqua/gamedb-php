@@ -58,3 +58,28 @@ GRANT ALL PRIVILEGES ON TABLE holds TO gamedbuser;
 GRANT ALL PRIVILEGES ON TABLE item_count TO gamedbuser;
 
 GRANT ALL PRIVILEGES ON ALL sequences IN SCHEMA PUBLIC TO gamedbuser;
+
+CREATE FUNCTION player_check() RETURNS trigger AS $player_check$
+  BEGIN
+    IF NEW.level IS NULL THEN
+      RAISE EXCEPTION 'level cannot be null';
+    END IF;
+
+    IF NEW.level <= 0 THEN
+      RAISE EXCEPTION '% cannot have a <=0 level', NEW.level;
+    END IF;
+
+    IF NEW.health IS NULL THEN
+      RAISE EXCEPTION 'health cannot be null';
+    END IF;
+
+    IF NEW.health <= 0 THEN
+      RAISE EXCEPTION '% cannot have a <=0 health', NEW.health;
+    END IF;
+
+    RETURN NEW;
+  END;
+$player_check$ LANGUAGE plpgsql;
+
+CREATE TRIGGER player_check BEFORE INSERT OR UPDATE ON players
+    FOR EACH ROW EXECUTE PROCEDURE player_check();
