@@ -2,11 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: N
- * Date: 2018/5/17
- * Time: 17:43
+ * Date: 2018/5/18
+ * Time: 12:03
  */
 $server_id = $_GET['server_id'];
-$player_id = $_GET['player_id'];
 
 $host        = "host=127.0.0.1";
 $port        = "port=5432";
@@ -14,10 +13,6 @@ $dbname      = "dbname=gamedb";
 $credentials = "user=gamedbuser password=gPassword";
 
 $db = pg_connect( "$host $port $dbname $credentials"  );
-
-$player = pg_query($db, "SELECT * FROM players WHERE server_id = $server_id AND id = '$player_id' ;");
-$holds = pg_query($db, "SELECT * FROM holds WHERE server_id = $server_id AND player_id = '$player_id' ;");
-
 ?>
 
 <!DOCTYPE html>
@@ -55,7 +50,7 @@ $holds = pg_query($db, "SELECT * FROM holds WHERE server_id = $server_id AND pla
     <ol class="breadcrumb">
         <li class="breadcrumb-item"><a href="/gamedb-php/servers-list.php">Server List</a></li>
         <?php echo "<li class=\"breadcrumb-item\"><a href=\"/gamedb-php/server.php?id=$server_id\">Player List</a></li>"; ?>
-        <li class="breadcrumb-item active" aria-current="page">Player</li>
+        <li class="breadcrumb-item active" aria-current="page">Item Statistics</li>
     </ol>
 </nav>
 
@@ -63,51 +58,51 @@ $holds = pg_query($db, "SELECT * FROM holds WHERE server_id = $server_id AND pla
 
 
 
-    <div class="row h-100">
-        <div class="col bg-primary text-white" style="max-width: 370px; height: 660px; padding-top: 40px;padding-left: 28px">
-            <?php
-            $player_name = pg_fetch_result($player, 2);
-            $player_level = pg_fetch_result($player, 3);
-            $player_health = pg_fetch_result($player, 4);
-            $player_career = pg_fetch_result($player, 5);
-            echo <<<EOF
-                <h1 style="margin-bottom: 40px">$player_name</h1>
-                <h5>level: $player_level</h5>
-                <h5>health: $player_health</h5>
-                <h5>career: $player_career</h5>
-EOF;
-            ?>
+    <div class="row" style="margin-bottom: 20px;">
+        <div class="page-header">
+            <h1>
+                Item Statistics
+            </h1>
+            <h3>
+                Server id:<?php echo $server_id ?>
+            </h3>
         </div>
-
-        <div class="col">
-            <h3>Item held</h3>
-            <div class="d-flex flex-wrap">
-
-                <?php
-                while ($row = pg_fetch_row($holds)) {
-                    $item = pg_query($db, "SELECT * FROM items WHERE id = $row[2];");
-                    $item_name = pg_fetch_result($item,1);
-                    $item_value = pg_fetch_result($item,2);
-                    echo <<<EOF
-                        <div class="card mw-100" style="min-width: 220px; margin: 10px;">
-                            <div class="card-body" style="padding-bottom: 10px">
-                                <h4 class="card-title" style="margin-right: 20px;">$item_name</h4>
-                                <h6>value: $item_value</h6>
-                                <h6>quantity: $row[3]</h6>
-                            </div>
-                            
-                            <div class="card-footer" style="padding-right: 8px; padding-bottom: 5px; padding-top: 8px">
-                                <a href="/gamedb-php/item.php?item_id=$row[2]" class="btn btn-primary float-right">Detail</a>
-                            </div>
-                        
-                        </div>
-EOF;
-                }
-                ?>
-            </div>
-        </div>
-
     </div>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Name</th>
+                <th>Value</th>
+                <th>Total Quantity</th>
+                <th>Total Value</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php
+        // $item_list = pg_query($db, "SELECT * FROM item_count WHERE server_id = $server_id;");
+        $item_list = pg_query($db, "SELECT * FROM items;");
+        while ($row = pg_fetch_row($item_list)) {
+            $item_c = pg_query($db, "SELECT * FROM item_count WHERE server_id = $server_id AND item_id = $row[0];");
+            $total_quantity = pg_fetch_result($item_c, 2);
+            if ($total_quantity == FALSE) {
+                $total_quantity = 0;
+            }
+            $total_value = $total_quantity * $row[2];
+            echo <<<EOF
+                <tr>
+                    <td>$row[0]</td>
+                    <td>$row[1]</td>
+                    <td>$row[2]</td>
+                    <td>$total_quantity</td>
+                    <td>$total_value</td>
+                </tr>
+EOF;
+        }
+        ?>
+        </tbody>
+    </table>
 
 </div>
 

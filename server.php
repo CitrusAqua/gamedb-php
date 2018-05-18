@@ -51,14 +51,31 @@ if(isset($_POST['submit'])) {
 
 <body>
 
-<div class="container">
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">The Game Database</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <nav aria-label="breadcrumb" style="margin-bottom: 60px">
-        <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="/gamedb-php/servers-list.php">Server List</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Player List</li>
-        </ol>
-    </nav>
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="/gamedb-php/servers-list.php">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/gamedb-php/about.php">About <span class="sr-only">(current)</span></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<nav aria-label="breadcrumb" style="margin-bottom: 60px">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/gamedb-php/servers-list.php">Server List</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Player List</li>
+    </ol>
+</nav>
+
+<div class="container">
 
     <div class="row" style="margin-bottom: 20px;">
         <div class="col">
@@ -72,8 +89,12 @@ if(isset($_POST['submit'])) {
             </div>
         </div>
 
-        <div class="col">
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPlayer">New player</button>
+        <div class="col align-items-end" style="padding-right: 20px">
+            <div class="btn-group-vertical float-right">
+                <?php echo "<a href=\"/gamedb-php/item-statistics.php?server_id=$id\" class=\"btn btn-info\">Item Statistic</a>" ?>
+                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#newPlayer">New player</button>
+            </div>
+
             <div class="modal fade" id="newPlayer" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered" role="document">
                     <div class="modal-content">
@@ -148,7 +169,7 @@ EOF;
 
         while ($row = pg_fetch_row($player_list)) {
             echo <<<EOF
-                <div class="card" style="max-width:760px; margin-top: 20px; margin-bottom: 20px;">
+                <div class="card" style="margin-top: 20px; margin-bottom: 20px;">
                     <div class="card-body">
                 
                         <div class="container">
