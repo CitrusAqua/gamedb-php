@@ -1,10 +1,12 @@
 CREATE TYPE player_career AS ENUM ('Knight', 'Mage', 'Priest');
+COMMIT;
 
 CREATE TABLE servers (
   id SERIAL,
   running boolean NOT NULL,
   PRIMARY KEY (id)
 );
+COMMIT;
 
 CREATE TABLE players (
   id SERIAL,
@@ -15,11 +17,13 @@ CREATE TABLE players (
   career player_career NOT NULL,
   PRIMARY KEY (server_id, id)
 );
+COMMIT;
 
 ALTER TABLE players
   ADD CONSTRAINT fk_player_server
   FOREIGN KEY (server_id)
   REFERENCES servers(id);
+COMMIT;
 
 CREATE TABLE items (
   id SERIAL,
@@ -27,6 +31,7 @@ CREATE TABLE items (
   value integer NOT NULL,
   PRIMARY KEY (id)
 );
+COMMIT;
 
 CREATE TABLE holds (
   server_id integer NOT NULL,
@@ -35,21 +40,25 @@ CREATE TABLE holds (
   quantity integer NOT NULL,
   PRIMARY KEY (server_id, player_id, item_id)
 );
+COMMIT;
 
 ALTER TABLE holds
   ADD CONSTRAINT fk_hold_player
   FOREIGN KEY (server_id, player_id)
   REFERENCES players(server_id, id);
+COMMIT;
 
 ALTER TABLE holds
   ADD CONSTRAINT fk_hold_item
   FOREIGN KEY (item_id)
   REFERENCES items(id);
+COMMIT;
 
 CREATE VIEW item_count AS
   SELECT DISTINCT server_id, item_id, Sum(quantity) AS "count"
   FROM holds
   GROUP BY server_id, item_id;
+COMMIT;
 
 GRANT ALL PRIVILEGES ON TABLE servers TO gamedbuser;
 GRANT ALL PRIVILEGES ON TABLE players TO gamedbuser;
@@ -80,6 +89,19 @@ CREATE FUNCTION player_check() RETURNS trigger AS $player_check$
     RETURN NEW;
   END;
 $player_check$ LANGUAGE plpgsql;
+COMMIT;
 
 CREATE TRIGGER player_check BEFORE INSERT OR UPDATE ON players
     FOR EACH ROW EXECUTE PROCEDURE player_check();
+COMMIT;
+
+CREATE OR REPLACE FUNCTION insert_item(m_server_id integer, m_plsyer_id integer, m_item_id integer, m_quantity integer) RETURNS integer AS $$
+  BEGIN
+    IF EXISTS(SELECT * FROM holds WHERE m_server_id = server_id AND m_plsyer_id = player_id AND m_item_id = item_id) THEN
+      UPDATE holds SET quantity = m_quantity + quantity WHERE m_server_id = server_id AND m_plsyer_id = player_id AND m_item_id = item_id;
+    ELSE
+      INSERT INTO holds(server_id, player_id, item_id, quantity) VALUES(m_server_id, m_plsyer_id, m_item_id, m_quantity);
+    END IF;
+  END;
+$$ LANGUAGE plpgsql;
+COMMIT;

@@ -45,7 +45,7 @@
     <h1 class="display-1" style="margin-bottom: 64px">About</h1>
     <p>The Game Database is an application for demonstrating some database operations, including create, retrieve, update and delete (CRUD).</p>
     <p>It's my database course's project work in mid 2018.</p>
-    <p>Developed on Apache 2.4, PHP 7.2, PostgreSQL 9.6 and Bootstrap 4.1.</p>
+    <p>Developed on Apache 2.4, PHP 7.2.5, PostgreSQL 9.6 and Bootstrap 4.1.</p>
     <p>Created by 左振宇.</p>
     <p>Student ID: 1610842.</p>
     <p>The source code can be found <a href="https://github.com/mixplugs/gamedb-php">here</a>.</p>
