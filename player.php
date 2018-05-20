@@ -43,7 +43,10 @@ $holds = pg_query($db, "SELECT * FROM holds WHERE server_id = $server_id AND pla
     <div class="collapse navbar-collapse" id="navbarsExample02">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/gamedb-php/servers-list.php">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/gamedb-php/servers-list.php">SERVERS <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/gamedb-php/items-list.php">ITEMS <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="/gamedb-php/about.php">About <span class="sr-only">(current)</span></a>

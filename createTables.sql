@@ -105,3 +105,16 @@ CREATE OR REPLACE FUNCTION insert_item(m_server_id integer, m_plsyer_id integer,
   END;
 $$ LANGUAGE plpgsql;
 COMMIT;
+
+CREATE OR REPLACE FUNCTION update_item(old_item_id integer, new_item_id integer, new_item_name varchar(60), new_item_value integer) RETURNS integer AS $$
+  BEGIN
+    IF (old_item_id != new_item_name) THEN
+      IF EXISTS(SELECT * FROM items WHERE id = new_item_id) THEN
+        RAISE EXCEPTION 'Item ID already exists.';
+      END IF;
+    END IF;
+    UPDATE holds SET item_id = new_item_id WHERE item_id = old_item_id;
+    UPDATE items SET id = new_item_id AND name = new_item_name AND value = new_item_value WHERE id = old_item_id;
+  END;
+$$ LANGUAGE plpgsql;
+COMMIT;
