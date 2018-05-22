@@ -85,14 +85,18 @@ CREATE OR REPLACE FUNCTION add_item(m_server_id integer, m_plsyer_id integer, m_
   BEGIN
     IF m_quantity <=0 THEN
       RAISE EXCEPTION 'Quantity must greater than 0.';
+    END IF;
+
     IF NOT EXISTS(SELECT * FROM items WHERE id = m_item_id) THEN
       RAISE EXCEPTION 'Item not exist.';
     END IF;
+
     IF EXISTS(SELECT * FROM holds WHERE m_server_id = server_id AND m_plsyer_id = player_id AND m_item_id = item_id) THEN
       UPDATE holds SET quantity = m_quantity + quantity WHERE m_server_id = server_id AND m_plsyer_id = player_id AND m_item_id = item_id;
     ELSE
       INSERT INTO holds(server_id, player_id, item_id, quantity) VALUES(m_server_id, m_plsyer_id, m_item_id, m_quantity);
     END IF;
+
     RETURN TRUE;
   END;
 $$ LANGUAGE plpgsql;
