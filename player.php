@@ -7,6 +7,7 @@
  */
 $server_id = $_GET['server_id'];
 $player_id = $_GET['player_id'];
+$add_item_success = isset($_GET['add_item']) ? $_GET['add_item'] : null;
 
 $host        = "host=127.0.0.1";
 $port        = "port=5432";
@@ -18,6 +19,22 @@ $db = pg_connect( "$host $port $dbname $credentials"  );
 $player = pg_query($db, "SELECT * FROM players WHERE server_id = $server_id AND id = '$player_id' ;");
 $holds = pg_query($db, "SELECT * FROM holds WHERE server_id = $server_id AND player_id = '$player_id' ;");
 
+?>
+
+<?php
+if(isset($_POST['add_item'])) {
+    $new_id = $_POST['new_id'];
+    $new_quantity = $_POST['new_quantity'];
+    $query = pg_query($db, "SELECT * FROM add_item($server_id, $player_id, $new_id, $new_quantity);");
+    //Header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . 'id=' . $id . '&create_player=true');
+    if ($query) {
+        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . 'server_id=' . $server_id . '&player_id=' . $player_id. '&add_item=true');
+        exit;
+    } else {
+        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?' . 'server_id=' . $server_id . '&player_id=' . $player_id. '&add_item=false');
+        exit;
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -83,30 +100,94 @@ EOF;
         </div>
 
         <div class="col">
-            <h3>Item held</h3>
-            <div class="d-flex flex-wrap">
+            <div class="row">
+                <div class="col align-self-start" style="padding-left: 36px; padding-top: 12px">
+                    <h3>Item held</h3>
+                </div>
+                <div class="col align-self-end">
+                    <div class="btn-group-vertical float-right">
+                        <button type="button" class="btn btn-raised btn-primary" data-toggle="modal" data-target="#addItem">Add item</button>
 
-                <?php
-                while ($row = pg_fetch_row($holds)) {
-                    $item = pg_query($db, "SELECT * FROM items WHERE id = $row[2];");
-                    $item_name = pg_fetch_result($item,1);
-                    $item_value = pg_fetch_result($item,2);
-                    echo <<<EOF
-                        <div class="card" style="min-width: 220px; margin: 12px;">
-                            <div class="card-body" style="padding-bottom: 10px">
-                                <h4 class="card-title" style="margin-right: 20px;">$item_name</h4>
-                                <h6>value: $item_value</h6>
-                                <h6>quantity: $row[3]</h6>
+                        <div class="modal fade" id="addItem" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="newPlayerLabel">Add Item</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <form method="post">
+                                        <div class="modal-body">
+                                            <div class="form-group">
+                                                <label for="levelInput">Item ID</label>
+                                                <input type="number" class="form-control" id="levelInput" name="new_id">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="healthInput">Quantity</label>
+                                                <input type="number" class="form-control" id="healthInput" name="new_quantity">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary" name="add_item" value=true >Add Item</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
-                            
-                            <div class="card-footer" style="padding-right: 8px; padding-bottom: 5px; padding-top: 8px">
-                                <a href="/gamedb-php/item.php?item_id=$row[2]" class="btn btn-primary float-right">Detail</a>
-                            </div>
-                        
                         </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <?php
+            if (!isset($add_item_success)) {}
+            elseif ($add_item_success == 'true') {
+                echo <<<EOF
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        Successfully added item.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
 EOF;
-                }
-                ?>
+            } else {
+                echo <<<EOF
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        Failed to add item. Something went wrong.
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+EOF;
+            }
+            ?>
+
+            <div class="col" style="margin:0px;padding:0px;">
+                <div class="d-flex flex-wrap">
+                    <?php
+                    while ($row = pg_fetch_row($holds)) {
+                        $item = pg_query($db, "SELECT * FROM items WHERE id = $row[2];");
+                        $item_name = pg_fetch_result($item,1);
+                        $item_value = pg_fetch_result($item,2);
+                        echo <<<EOF
+                            <div class="card" style="min-width: 220px; margin: 12px;">
+                                <div class="card-body" style="padding-bottom: 10px">
+                                    <h4 class="card-title" style="margin-right: 20px;">$item_name</h4>
+                                    <h6>value: $item_value</h6>
+                                    <h6>quantity: $row[3]</h6>
+                                </div>
+                                
+                                <div class="card-footer" style="padding-right: 8px; padding-bottom: 5px; padding-top: 8px">
+                                    <a href="/gamedb-php/item.php?item_id=$row[2]" class="btn btn-primary float-right">Detail</a>
+                                </div>
+                            
+                            </div>
+EOF;
+                    }
+                    ?>
+                </div>
             </div>
         </div>
 

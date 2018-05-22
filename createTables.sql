@@ -1,29 +1,24 @@
 CREATE TYPE player_career AS ENUM ('Knight', 'Mage', 'Priest');
-COMMIT;
 
 CREATE TABLE servers (
   id SERIAL,
   running boolean NOT NULL,
   PRIMARY KEY (id)
 );
-COMMIT;
 
 CREATE TABLE players (
   id SERIAL,
   server_id integer NOT NULL,
-  name varchar(11) NOT NULL,
+  name varchar(60) NOT NULL,
   level smallint NOT NULL,
   health integer NOT NULL,
   career player_career NOT NULL,
   PRIMARY KEY (server_id, id)
 );
-COMMIT;
 
 ALTER TABLE players
   ADD CONSTRAINT fk_player_server
-  FOREIGN KEY (server_id)
-  REFERENCES servers(id);
-COMMIT;
+  FOREIGN KEY (server_id) REFERENCES servers(id) ON DELETE CASCADE;
 
 CREATE TABLE items (
   id SERIAL,
@@ -31,7 +26,6 @@ CREATE TABLE items (
   value integer NOT NULL,
   PRIMARY KEY (id)
 );
-COMMIT;
 
 CREATE TABLE holds (
   server_id integer NOT NULL,
@@ -40,25 +34,19 @@ CREATE TABLE holds (
   quantity integer NOT NULL,
   PRIMARY KEY (server_id, player_id, item_id)
 );
-COMMIT;
 
 ALTER TABLE holds
   ADD CONSTRAINT fk_hold_player
-  FOREIGN KEY (server_id, player_id)
-  REFERENCES players(server_id, id);
-COMMIT;
+  FOREIGN KEY (server_id, player_id) REFERENCES players(server_id, id) ON DELETE CASCADE;
 
 ALTER TABLE holds
   ADD CONSTRAINT fk_hold_item
-  FOREIGN KEY (item_id)
-  REFERENCES items(id);
-COMMIT;
+  FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE;
 
 CREATE VIEW item_count AS
   SELECT DISTINCT server_id, item_id, Sum(quantity) AS "count"
   FROM holds
   GROUP BY server_id, item_id;
-COMMIT;
 
 GRANT ALL PRIVILEGES ON TABLE servers TO gamedbuser;
 GRANT ALL PRIVILEGES ON TABLE players TO gamedbuser;
@@ -89,32 +77,23 @@ CREATE FUNCTION player_check() RETURNS trigger AS $player_check$
     RETURN NEW;
   END;
 $player_check$ LANGUAGE plpgsql;
-COMMIT;
 
 CREATE TRIGGER player_check BEFORE INSERT OR UPDATE ON players
     FOR EACH ROW EXECUTE PROCEDURE player_check();
-COMMIT;
 
-CREATE OR REPLACE FUNCTION insert_item(m_server_id integer, m_plsyer_id integer, m_item_id integer, m_quantity integer) RETURNS integer AS $$
+CREATE OR REPLACE FUNCTION add_item(m_server_id integer, m_plsyer_id integer, m_item_id integer, m_quantity integer) RETURNS boolean AS $$
   BEGIN
+    IF NOT EXISTS(SELECT * FROM items WHERE id = m_item_id) THEN
+      RAISE EXCEPTION 'Item not exist.';
+    END IF;
     IF EXISTS(SELECT * FROM holds WHERE m_server_id = server_id AND m_plsyer_id = player_id AND m_item_id = item_id) THEN
       UPDATE holds SET quantity = m_quantity + quantity WHERE m_server_id = server_id AND m_plsyer_id = player_id AND m_item_id = item_id;
     ELSE
       INSERT INTO holds(server_id, player_id, item_id, quantity) VALUES(m_server_id, m_plsyer_id, m_item_id, m_quantity);
     END IF;
+    RETURN TRUE;
   END;
 $$ LANGUAGE plpgsql;
-COMMIT;
 
-CREATE OR REPLACE FUNCTION update_item(old_item_id integer, new_item_id integer, new_item_name varchar(60), new_item_value integer) RETURNS integer AS $$
-  BEGIN
-    IF (old_item_id != new_item_name) THEN
-      IF EXISTS(SELECT * FROM items WHERE id = new_item_id) THEN
-        RAISE EXCEPTION 'Item ID already exists.';
-      END IF;
-    END IF;
-    UPDATE holds SET item_id = new_item_id WHERE item_id = old_item_id;
-    UPDATE items SET id = new_item_id AND name = new_item_name AND value = new_item_value WHERE id = old_item_id;
-  END;
-$$ LANGUAGE plpgsql;
+
 COMMIT;

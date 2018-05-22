@@ -14,7 +14,7 @@ $credentials = "user=gamedbuser password=gPassword";
 $db = pg_connect( "$host $port $dbname $credentials"  );
 
 $create_item_success = isset($_GET['create_item']) ? $_GET['create_item'] : null;
-$edit_item_success = isset($_GET['edit_item']) ? $_GET['edit_item'] : null;
+$delete_item_success = isset($_GET['delete_item']) ? $_GET['delete_item'] : null;
 
 ?>
 
@@ -31,19 +31,14 @@ if(isset($_POST['new_item'])) {
         exit;
     }
 }
-if(isset($_POST['edit'])) {
-    $old_id = $_POST['edit'];
-    $new_id = $_POST['new_id'];
-    $new_name = $_POST['new_name'];
-    $new_value = $_POST['new_value'];
-    $sql = 'SELECT update_item($1,$2,$3,$4)';
-    $res = pg_prepare($db, "q_update_item", $sql);
-    $res = pg_execute($db, "q_update_item", array($old_id, $new_id, $new_name, $new_value));
-    if ($res) {
-        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?edit_item=true');
+if(isset($_POST['destroy'])) {
+    $item_id = $_POST['destroy'];
+    $query = pg_query($db, "DELETE FROM items WHERE id = $item_id;");
+    if ($query) {
+        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?delete_item=true');
         exit;
     } else {
-        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?edit_item=false');
+        header("Location: " . 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'] . '?delete_item=false');
         exit;
     }
 }
@@ -154,11 +149,11 @@ EOF;
 EOF;
     }
 
-    if (!isset($edit_item_success)) {}
-    elseif ($edit_item_success == 'true') {
+    if (!isset($delete_item_success)) {}
+    elseif ($delete_item_success == 'true') {
         echo <<<EOF
             <div class="alert alert-success alert-dismissible fade show" role="alert">
-                Successfully edited item.
+                Successfully deleted item.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -167,13 +162,14 @@ EOF;
     } else {
         echo <<<EOF
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                Failed to edit item. Something went wrong.
+                Failed to delete item. Something went wrong.
                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 EOF;
     }
+
     ?>
 
     <table class="table table-hover" style="margin-top:24px;">
@@ -196,44 +192,9 @@ EOF;
             <td class="align-middle">$row[1]</td>
             <td class="align-middle">$row[2]</td>
             <td>
-                <button type="button" class="btn btn-info" style="margin:0px;" data-toggle="modal" data-target="#editModal$row[0]">Edit</button>
                 <button type="button" class="btn btn-danger" style="margin:0px;" data-toggle="modal" data-target="#deleteModal$row[0]">Delete</button>
             </td>
         </tr>
-
-        <!-- Modal -->
-        <div class="modal fade" id="editModal$row[0]" tabindex="-1" role="dialog" aria-labelledby="editInput" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Item</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form action="" method="post" style="margin:0px">
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <label for="idInput">New ID</label>
-                                <input type="number" class="form-control" id="idInput" placeholder="$row[0]" name="new_id">
-                            </div>
-                            <div class="form-group">
-                                <label for="nameInput">New Name</label>
-                                <input type="text" class="form-control" id="nameInput" placeholder="$row[1]" name="new_name">
-                            </div>
-                            <div class="form-group">
-                                <label for="valueInput">New Value</label>
-                                <input type="number" class="form-control" id="valueInput" placeholder="$row[2]" name="new_value">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                            <button name="edit" value=$row[0] type="submit" class="btn btn-info">Edit</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
         
         <div class="modal fade" id="deleteModal$row[0]" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmation" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered" role="document">
