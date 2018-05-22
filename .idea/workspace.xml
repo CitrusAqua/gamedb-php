@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1792ebdc-a824-48c0-91ac-a96964d4cbfc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createTables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/createTables.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/items-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/items-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/player.php" beforeDir="false" afterPath="$PROJECT_DIR$/player.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -86,11 +83,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="server.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="server.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="21" column="33" lean-forward="true" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
+            <state relative-caret-position="506">
+              <caret line="136" column="107" lean-forward="true" selection-start-line="136" selection-start-column="107" selection-end-line="136" selection-end-column="107" />
+              <folding>
+                <element signature="e#270#277#1" expanded="true" />
+                <element signature="e#288#295#1" expanded="true" />
+                <element signature="e#270#277#1" expanded="true" />
+                <element signature="e#288#295#1" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#2060#2067#1" expanded="true" />
+                <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -104,10 +111,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createTables.sql" pinned="false" current-in-tab="true">
+      <file leaf-file-name="createTables.sql" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/createTables.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="836">
+            <state relative-caret-position="782">
               <caret line="98" column="7" lean-forward="true" selection-start-line="98" selection-start-column="7" selection-end-line="98" selection-end-column="7" />
             </state>
           </provider>
@@ -156,10 +163,10 @@
         <option value="$PROJECT_DIR$/servers-list.php" />
         <option value="$PROJECT_DIR$/about.php" />
         <option value="$PROJECT_DIR$/item-statistics.php" />
-        <option value="$PROJECT_DIR$/server.php" />
         <option value="$PROJECT_DIR$/player.php" />
         <option value="$PROJECT_DIR$/items-list.php" />
         <option value="$PROJECT_DIR$/createTables.sql" />
+        <option value="$PROJECT_DIR$/server.php" />
       </list>
     </option>
   </component>
@@ -266,12 +273,12 @@
       <workItem from="1526730805799" duration="6035000" />
       <workItem from="1526739499347" duration="4226000" />
       <workItem from="1526997356326" duration="1233000" />
-      <workItem from="1526998619441" duration="2588000" />
+      <workItem from="1526998619441" duration="3175000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80047000" />
+    <option name="totallyTimeSpent" value="80634000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -583,6 +590,23 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/servers-list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/createTables.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="98" column="7" lean-forward="true" selection-start-line="98" selection-start-column="7" selection-end-line="98" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/player.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="660">
@@ -600,25 +624,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="21" column="33" lean-forward="true" selection-start-line="21" selection-start-column="33" selection-end-line="21" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/servers-list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="485">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
+        <state relative-caret-position="506">
+          <caret line="136" column="107" lean-forward="true" selection-start-line="136" selection-start-column="107" selection-end-line="136" selection-end-column="107" />
           <folding>
+            <element signature="e#270#277#1" expanded="true" />
+            <element signature="e#288#295#1" expanded="true" />
+            <element signature="e#270#277#1" expanded="true" />
+            <element signature="e#288#295#1" expanded="true" />
             <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#2060#2067#1" expanded="true" />
+            <element signature="n#style#0;n#form#0;n#div#0;n#div#0;n#div#2;n#div#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/createTables.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="836">
-          <caret line="98" column="7" lean-forward="true" selection-start-line="98" selection-start-column="7" selection-end-line="98" selection-end-column="7" />
         </state>
       </provider>
     </entry>

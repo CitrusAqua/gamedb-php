@@ -134,7 +134,7 @@ if(isset($_POST['destroy'])) {
                             <div class="modal-body">
                                 <div class="form-group">
                                     <label for="nameInput">Name</label>
-                                    <input type="text" class="form-control" id="nameInput" placeholder="Max 11 chars" name="new_name">
+                                    <input type="text" class="form-control" id="nameInput" name="new_name">
                                 </div>
                                 <div class="form-group">
                                     <label for="levelInput">Level</label>
