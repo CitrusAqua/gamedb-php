@@ -83,6 +83,8 @@ CREATE TRIGGER player_check BEFORE INSERT OR UPDATE ON players
 
 CREATE OR REPLACE FUNCTION add_item(m_server_id integer, m_plsyer_id integer, m_item_id integer, m_quantity integer) RETURNS boolean AS $$
   BEGIN
+    IF m_quantity <=0 THEN
+      RAISE EXCEPTION 'Quantity must greater than 0.';
     IF NOT EXISTS(SELECT * FROM items WHERE id = m_item_id) THEN
       RAISE EXCEPTION 'Item not exist.';
     END IF;
