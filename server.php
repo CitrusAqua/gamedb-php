@@ -145,7 +145,7 @@ if(isset($_POST['destroy'])) {
                                     <input type="number" class="form-control" id="healthInput" name="new_health">
                                 </div>
                                 <div class="form-group">
-                                    <label for="careerSelect">Example select</label>
+                                    <label for="careerSelect">Career</label>
                                     <select class="form-control" id="careerSelect" name="new_career">
                                         <option value="Knight">Knight</option>
                                         <option value="Mage">Mage</option>
