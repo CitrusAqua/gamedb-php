@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1792ebdc-a824-48c0-91ac-a96964d4cbfc" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/items-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/items-list.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -86,8 +87,8 @@
       <file leaf-file-name="server.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
-              <caret line="147" column="68" selection-start-line="147" selection-start-column="68" selection-end-line="147" selection-end-column="68" />
+            <state relative-caret-position="308">
+              <caret line="136" column="134" lean-forward="true" selection-start-line="136" selection-start-column="134" selection-end-line="136" selection-end-column="134" />
               <folding>
                 <element signature="e#270#277#1" expanded="true" />
                 <element signature="e#288#295#1" expanded="true" />
@@ -123,8 +124,8 @@
       <file leaf-file-name="items-list.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/items-list.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="807">
-              <caret line="165" column="92" lean-forward="true" selection-start-line="165" selection-start-column="92" selection-end-line="165" selection-end-column="92" />
+            <state relative-caret-position="531">
+              <caret line="111" column="134" lean-forward="true" selection-start-line="111" selection-start-column="134" selection-end-line="111" selection-end-column="134" />
               <folding>
                 <element signature="e#268#275#1" expanded="true" />
                 <element signature="e#286#293#1" expanded="true" />
@@ -164,8 +165,8 @@
         <option value="$PROJECT_DIR$/about.php" />
         <option value="$PROJECT_DIR$/item-statistics.php" />
         <option value="$PROJECT_DIR$/player.php" />
-        <option value="$PROJECT_DIR$/items-list.php" />
         <option value="$PROJECT_DIR$/createTables.sql" />
+        <option value="$PROJECT_DIR$/items-list.php" />
         <option value="$PROJECT_DIR$/server.php" />
       </list>
     </option>
@@ -273,12 +274,12 @@
       <workItem from="1526730805799" duration="6035000" />
       <workItem from="1526739499347" duration="4226000" />
       <workItem from="1526997356326" duration="1233000" />
-      <workItem from="1526998619441" duration="3274000" />
+      <workItem from="1526998619441" duration="3382000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="80733000" />
+    <option name="totallyTimeSpent" value="80841000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
@@ -572,17 +573,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/items-list.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="807">
-          <caret line="165" column="92" lean-forward="true" selection-start-line="165" selection-start-column="92" selection-end-line="165" selection-end-column="92" />
-          <folding>
-            <element signature="e#268#275#1" expanded="true" />
-            <element signature="e#286#293#1" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/item-statistics.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="604">
@@ -622,10 +612,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/items-list.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="531">
+          <caret line="111" column="134" lean-forward="true" selection-start-line="111" selection-start-column="134" selection-end-line="111" selection-end-column="134" />
+          <folding>
+            <element signature="e#268#275#1" expanded="true" />
+            <element signature="e#286#293#1" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/server.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="147" column="68" selection-start-line="147" selection-start-column="68" selection-end-line="147" selection-end-column="68" />
+        <state relative-caret-position="308">
+          <caret line="136" column="134" lean-forward="true" selection-start-line="136" selection-start-column="134" selection-end-line="136" selection-end-column="134" />
           <folding>
             <element signature="e#270#277#1" expanded="true" />
             <element signature="e#288#295#1" expanded="true" />
