@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="1792ebdc-a824-48c0-91ac-a96964d4cbfc" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createTables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/createTables.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/createViews.sql" beforeDir="false" afterPath="$PROJECT_DIR$/createViews.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/item-statistics.php" beforeDir="false" afterPath="$PROJECT_DIR$/item-statistics.php" afterDir="false" />
-    </list>
+    <list default="true" id="1792ebdc-a824-48c0-91ac-a96964d4cbfc" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -96,8 +91,8 @@
       <file leaf-file-name="item-statistics.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/item-statistics.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="742">
-              <caret line="99" column="44" selection-start-line="99" selection-start-column="44" selection-end-line="99" selection-end-column="44" />
+            <state relative-caret-position="698">
+              <caret line="100" column="61" lean-forward="true" selection-start-line="100" selection-start-column="61" selection-end-line="100" selection-end-column="61" />
             </state>
           </provider>
         </entry>
@@ -261,16 +256,15 @@
       <workItem from="1526739499347" duration="4226000" />
       <workItem from="1526997356326" duration="1233000" />
       <workItem from="1526998619441" duration="4349000" />
-      <workItem from="1527084315304" duration="3871000" />
+      <workItem from="1527084315304" duration="4594000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="85679000" />
+    <option name="totallyTimeSpent" value="86402000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="7" />
@@ -606,8 +600,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/item-statistics.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="742">
-          <caret line="99" column="44" selection-start-line="99" selection-start-column="44" selection-end-line="99" selection-end-column="44" />
+        <state relative-caret-position="698">
+          <caret line="100" column="61" lean-forward="true" selection-start-line="100" selection-start-column="61" selection-end-line="100" selection-end-column="61" />
         </state>
       </provider>
     </entry>
