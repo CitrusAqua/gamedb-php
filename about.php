@@ -52,6 +52,7 @@
     <p>Created by 左振宇.</p>
     <p>Student ID: 1610842.</p>
     <p>The source code can be found <a href="https://github.com/mixplugs/gamedb-php">here</a>.</p>
+    <p><a href="/gamedb-php/docs/Project.doc">Doc</a> --- <a href="/gamedb-php/docs/Project.pdf">Pdf</a></p>
 
 
 </div>
