@@ -84,21 +84,19 @@ $db = pg_connect( "$host $port $dbname $credentials"  );
         </thead>
         <tbody>
         <?php
-        // $item_list = pg_query($db, "SELECT * FROM item_count WHERE server_id = $server_id;");
-        $item_list = pg_query($db, "SELECT * FROM items;");
+        $item_list = pg_query($db, "SELECT * FROM item_count WHERE server_id = $server_id;");
         while ($row = pg_fetch_row($item_list)) {
-            $item_c = pg_query($db, "SELECT * FROM item_count WHERE server_id = $server_id AND item_id = $row[0];");
-            $total_quantity = pg_fetch_result($item_c, 2);
-            if ($total_quantity == FALSE) {
+            $total_quantity = $row[2];
+            if ($total_quantity == NULL) {
                 $total_quantity = 0;
             }
-            $total_value = $total_quantity * $row[2];
+            $total_value = $total_quantity * $row[3];
             echo <<<EOF
                 <tr>
-                    <td>$row[0]</td>
                     <td>$row[1]</td>
                     <td>$row[2]</td>
-                    <td>$total_quantity</td>
+                    <td>$row[3]</td>
+                    <td>$row[4]</td>
                     <td>$total_value</td>
                 </tr>
 EOF;

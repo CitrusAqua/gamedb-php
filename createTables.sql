@@ -43,11 +43,6 @@ ALTER TABLE holds
   ADD CONSTRAINT fk_hold_item
   FOREIGN KEY (item_id) REFERENCES items(id) ON DELETE CASCADE;
 
-CREATE VIEW item_count AS
-  SELECT DISTINCT server_id, item_id, Sum(quantity) AS "count"
-  FROM holds
-  GROUP BY server_id, item_id;
-
 GRANT ALL PRIVILEGES ON TABLE servers TO gamedbuser;
 GRANT ALL PRIVILEGES ON TABLE players TO gamedbuser;
 GRANT ALL PRIVILEGES ON TABLE items TO gamedbuser;
