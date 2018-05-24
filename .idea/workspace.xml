@@ -160,7 +160,7 @@
       <path value="N:/php-7.2.5" />
     </include_path>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="126" />
     <option name="y" value="-19" />
     <option name="width" value="1400" />
@@ -248,16 +248,15 @@
       <workItem from="1526997356326" duration="1233000" />
       <workItem from="1526998619441" duration="4349000" />
       <workItem from="1527084315304" duration="4594000" />
-      <workItem from="1527092663468" duration="478000" />
+      <workItem from="1527092663468" duration="830000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86880000" />
+    <option name="totallyTimeSpent" value="87232000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="PHP-CGI Server" order="7" />
