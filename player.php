@@ -52,7 +52,7 @@ if(isset($_POST['add_item'])) {
 <body>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="/gamedb-php/servers-list.php">The Game Database</a>
+    <a class="navbar-brand" href="/gamedb-php/">The Game Database</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
